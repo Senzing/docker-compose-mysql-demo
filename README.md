@@ -85,10 +85,10 @@ This is the short-cut for installing all of the Senzing docker images:
 
 ```console
 docker build --tag senzing/mysql       https://github.com/senzing/docker-mysql.git
-docker build --tag senzing/g2loader    https://github.com/senzing/docker-g2loader.git
-docker build --tag senzing/g2command   https://github.com/senzing/docker-g2command.git
 docker build --tag senzing/python-base https://github.com/senzing/docker-python-base.git
 docker build --tag senzing/python-demo https://github.com/senzing/docker-python-demo.git
+docker build --tag senzing/g2loader    https://github.com/senzing/docker-g2loader.git
+docker build --tag senzing/g2command   https://github.com/senzing/docker-g2command.git
 ```
 
 #### senzing/mysql
@@ -215,7 +215,7 @@ If you do not already have an `/opt/senzing` directory on your local system, her
     export MYSQL_ROOT_PASSWORD=root
     export MYSQL_USERNAME=g2
     export MYSQL_PASSWORD=g2
-    export MYSQL_NETWORK=senzingdockercomposemysqldemo_backend
+    export MYSQL_NETWORK=dockercomposemysqldemo_backend
     export MYSQL_STORAGE=/storage/docker/senzing/docker-compose-mysql-demo
     ```
 
