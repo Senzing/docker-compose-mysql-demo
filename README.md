@@ -30,6 +30,12 @@ Also shown in the demonstration are commands to run the following Docker images:
     1. [Run G2Command.py](#run-g2commandpy)
 1. [Cleanup](#cleanup)    
 
+### Shortcut
+
+The following is the full description of the demonstration.
+For a "short cut" version of the command, see
+[demo-shortcuts](doc/demo-shortcuts.md).
+
 ## Preparation
 
 ### Set environment variables
