@@ -104,7 +104,7 @@ docker run -it senzing/mysql --version
 ```
 
 If docker image not available, create it by following instructions at
-[github.com/Senzing/docker-mysql](https://github.com/Senzing/docker-mysql#create-docker-container).
+[github.com/Senzing/docker-mysql](https://github.com/Senzing/docker-mysql#build-docker-image).
 
 #### senzing/g2loader
 
@@ -118,7 +118,7 @@ python: can't open file 'G2Loader.py': [Errno 2] No such file or directory
 *Note:* this is a hack as `--version` option does not exist.
 
 If docker image not available, create it by following instructions at
-[github.com/Senzing/docker-g2loader](https://github.com/Senzing/docker-g2loader#create-docker-container).
+[github.com/Senzing/docker-g2loader](https://github.com/Senzing/docker-g2loader#build-docker-image).
 
 #### senzing/g2command
 
@@ -132,7 +132,7 @@ python: can't open file 'G2Command.py': [Errno 2] No such file or directory
 *Note:* this is a hack as `--version` option does not exist.
 
 If docker image not available, create it by following instructions at
-[github.com/Senzing/docker-g2command](https://github.com/Senzing/docker-g2loader#create-docker-container).
+[github.com/Senzing/docker-g2command](https://github.com/Senzing/docker-g2loader#build-docker-image).
 
 #### senzing/python-demo
 
@@ -141,7 +141,7 @@ docker run -it senzing/python-demo --version
 ```
 
 If docker image not available, create it by following instructions at
-[github.com/Senzing/docker-python-demo](https://github.com/Senzing/docker-python-demo#create-docker-container).
+[github.com/Senzing/docker-python-demo](https://github.com/Senzing/docker-python-demo#build-docker-image).
 
 ## Run Docker formation
 
