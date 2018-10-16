@@ -28,7 +28,7 @@ Also shown in the demonstration are commands to run the following Docker images:
     1. [Add Senzing schemas](#add-senzing-schemas)
     1. [Add content](#add-content)
     1. [Run G2Command.py](#run-g2commandpy)
-1. [Cleanup](#cleanup)    
+1. [Cleanup](#cleanup)
 
 ### Shortcut
 
