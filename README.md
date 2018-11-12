@@ -221,9 +221,30 @@ In a separate (or reusable) terminal window:
 
 ## Cleanup
 
-```console
-cd ${GIT_REPOSITORY_DIR}
-docker-compose down
+In a separate (or reusable) terminal window:
 
-sudo rm -rf /storage/docker/senzing/docker-compose-mysql-demo
-```
+1. [Set environment variables for docker](#set-environment-variables-for-docker)
+1. Run `docker-compose` command.
+
+    ```console
+    cd ${GIT_REPOSITORY_DIR}
+    docker-compose down
+    ```
+
+1. Delete database storage.
+
+    ```console
+    sudo rm -rf ${MYSQL_STORAGE}
+    ```
+
+1. Delete SENZING_DIR.
+
+    ```console
+    sudo rm -rf ${SENZING_DIR}
+    ```
+
+1. Delete git repository.
+
+    ```console
+    sudo rm -rf ${GIT_REPOSITORY_DIR}
+    ```
