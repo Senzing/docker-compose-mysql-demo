@@ -6,11 +6,11 @@ This docker formation brings up the following docker containers:
 
 1. *mysql*
 1. *phpmyadmin/phpmyadmin*
-1. *senzing/python-demo*
+1. *[senzing/mysql-init](https://github.com/Senzing/docker-mysql-init)*
+1. *[senzing/python-demo](https://github.com/Senzing/docker-python-demo)*
 
 Also shown in the demonstration are commands to run the following Docker images:
 
-1. *senzing/mysql* in [Add Senzing schemas](#add-senzing-schemas)
 1. *senzing/g2loader* in [Add content](#add-content)
 1. *senzing/g2command* in [Run G2Command.py](#run-g2commandpy)
 
@@ -25,7 +25,6 @@ Also shown in the demonstration are commands to run the following Docker images:
     1. [Create SENZING_DIR](#create-senzing_dir)
     1. [Set environment variables](#set-environment-variables)
     1. [Launch docker formation](#launch-docker-formation)
-    1. [Add Senzing schemas](#add-senzing-schemas)
     1. [Add content](#add-content)
     1. [Run G2Command.py](#run-g2commandpy)
 1. [Cleanup](#cleanup)
@@ -90,21 +89,12 @@ The following docker images need to be installed.
 This is the short-cut for installing all of the Senzing docker images:
 
 ```console
-docker build --tag senzing/mysql       https://github.com/senzing/docker-mysql.git
+docker build --tag senzing/mysql-init  https://github.com/senzing/docker-mysql-init.git
 docker build --tag senzing/python-base https://github.com/senzing/docker-python-base.git
 docker build --tag senzing/python-demo https://github.com/senzing/docker-python-demo.git
 docker build --tag senzing/g2loader    https://github.com/senzing/docker-g2loader.git
 docker build --tag senzing/g2command   https://github.com/senzing/docker-g2command.git
 ```
-
-#### senzing/mysql
-
-```console
-docker run -it senzing/mysql --version
-```
-
-If docker image not available, create it by following instructions at
-[github.com/Senzing/docker-mysql](https://github.com/Senzing/docker-mysql#build-docker-image).
 
 #### senzing/g2loader
 
@@ -193,25 +183,6 @@ Once docker formation is up, phpMyAdmin will be available at
 
 The database storage will be on the local system at ${MYSQL_STORAGE}.
 The default database storage path is `/storage/docker/senzing/docker-compose-mysql-demo`.
-
-### Add Senzing schemas
-
-In a separate terminal window:
-
-1. [Set environment variables for docker](#set-environment-variables-for-docker)
-1. Run `docker` command.
-
-    ```console
-    docker run -it  \
-      --volume ${SENZING_DIR}:/opt/senzing \
-      --net ${MYSQL_NETWORK} \
-      senzing/mysql \
-        --user=${MYSQL_USERNAME} \
-        --password=${MYSQL_PASSWORD} \
-        --host=${MYSQL_HOST} \
-        --database=${MYSQL_DATABASE} \
-        --execute="source /opt/senzing/g2/data/g2core-schema-mysql-create.sql"
-    ```
 
 After the schema is loaded, the demonstration python/Flask app will be available at
 [localhost:5000](http://localhost:5000).
