@@ -101,7 +101,6 @@ docker build --tag senzing/g2command   https://github.com/senzing/docker-g2comma
 ```console
 $ docker run -it senzing/g2loader --projectFile /dummy-file
 
-Using internal database
 python: can't open file 'G2Loader.py': [Errno 2] No such file or directory
 ```
 
@@ -115,7 +114,6 @@ If docker image not available, create it by following instructions at
 ```console
 $ docker run -it senzing/g2command
 
-Using internal database
 python: can't open file 'G2Command.py': [Errno 2] No such file or directory
 ```
 
@@ -127,7 +125,9 @@ If docker image not available, create it by following instructions at
 #### senzing/python-demo
 
 ```console
-docker run -it senzing/python-demo --version
+$ docker run -it senzing/python-demo --version
+
+docker-entrypoint.sh version n.n.n
 ```
 
 If docker image not available, create it by following instructions at
