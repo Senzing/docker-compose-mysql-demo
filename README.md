@@ -11,8 +11,8 @@ This docker formation brings up the following docker containers:
 
 Also shown in the demonstration are commands to run the following Docker images:
 
-1. *senzing/g2loader* in [Add content](#add-content)
-1. *senzing/g2command* in [Run G2Command.py](#run-g2commandpy)
+1. *[senzing/g2loader](https://github.com/Senzing/docker-g2loader)* in [Add content](#add-content)
+1. *[senzing/g2command](https://github.com/Senzing/docker-g2command)* in [Run G2Command.py](#run-g2commandpy)
 
 ### Contents
 
