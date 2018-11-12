@@ -34,7 +34,7 @@ services:
     image: senzing/python-demo
     container_name: senzing-app
     environment:
-      SENZING_DATABASE_URL: "mysql://${MYSQL_USERNAME:-g2}:${MYSQL_PASSWORD:-g2}@senzing-mysql:3306/?schema=${MYSQL_DATABASE:-G2}"
+      SENZING_DATABASE_URL: "mysql://${MYSQL_USERNAME:-g2}:${MYSQL_PASSWORD:-g2}@senzing-mysql:3306/${MYSQL_DATABASE:-G2}"
       LC_CTYPE: en_US.utf8
     networks:
       - backend

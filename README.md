@@ -147,52 +147,8 @@ If docker image not available, create it by following instructions at
 
 ### Create SENZING_DIR
 
-If you do not already have an `/opt/senzing` directory on your local system, here's how to install the code.
-
-1. Set environment variable
-
-    ```console
-    export SENZING_DIR=/opt/senzing
-    ```
-
-1. Download [Senzing_API.tgz](https://s3.amazonaws.com/public-read-access/SenzingComDownloads/Senzing_API.tgz)
-
-    ```console
-    curl -X GET \
-      --output /tmp/Senzing_API.tgz \
-      https://s3.amazonaws.com/public-read-access/SenzingComDownloads/Senzing_API.tgz
-    ```
-
-1. Extract [Senzing_API.tgz](https://s3.amazonaws.com/public-read-access/SenzingComDownloads/Senzing_API.tgz)
-   to `${SENZING_DIR}`.
-
-    1. Linux
-
-        ```console
-        sudo mkdir -p ${SENZING_DIR}
-
-        sudo tar \
-          --extract \
-          --owner=root \
-          --group=root \
-          --no-same-owner \
-          --no-same-permissions \
-          --directory=${SENZING_DIR} \
-          --file=/tmp/Senzing_API.tgz
-        ```
-
-    1. macOS
-
-        ```console
-        sudo mkdir -p ${SENZING_DIR}
-
-        sudo tar \
-          --extract \
-          --no-same-owner \
-          --no-same-permissions \
-          --directory=${SENZING_DIR} \
-          --file=/tmp/Senzing_API.tgz
-        ```
+If you do not already have an `/opt/senzing` directory on your local system, visit
+[HOWTO - Create SENZING_DIR](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/create-senzing-dir.md).
 
 ### Set environment variables for docker
 
@@ -271,7 +227,7 @@ In a separate (or reusable) terminal window:
     docker run -it  \
       --volume ${SENZING_DIR}:/opt/senzing \
       --net ${MYSQL_NETWORK} \
-      --env SENZING_DATABASE_URL="mysql://${MYSQL_USERNAME}:${MYSQL_PASSWORD}@${MYSQL_HOST}:3306/?schema=${MYSQL_DATABASE}" \
+      --env SENZING_DATABASE_URL="mysql://${MYSQL_USERNAME}:${MYSQL_PASSWORD}@${MYSQL_HOST}:3306/${MYSQL_DATABASE}" \
       senzing/g2loader \
         --purgeFirst \
         --projectFile /opt/senzing/g2/python/demo/sample/project.csv
@@ -288,7 +244,7 @@ In a separate (or reusable) terminal window:
     docker run -it  \
       --volume ${SENZING_DIR}:/opt/senzing \
       --net ${MYSQL_NETWORK} \
-      --env SENZING_DATABASE_URL="mysql://${MYSQL_USERNAME}:${MYSQL_PASSWORD}@${MYSQL_HOST}:3306/?schema=${MYSQL_DATABASE}" \
+      --env SENZING_DATABASE_URL="mysql://${MYSQL_USERNAME}:${MYSQL_PASSWORD}@${MYSQL_HOST}:3306/${MYSQL_DATABASE}" \
       senzing/g2command
     ```
 
