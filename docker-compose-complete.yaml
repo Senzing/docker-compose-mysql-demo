@@ -1,0 +1,52 @@
+version: '3'
+services:
+
+  mysql:
+    image: mysql:5.7
+    container_name: senzing-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-G2}
+      MYSQL_USER: ${MYSQL_USERNAME:-g2}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-g2}
+    networks:
+      - backend
+    ports:
+      - 3306:3306
+    volumes:
+      - ${MYSQL_STORAGE:-/storage/docker/senzing/docker-compose-mysql-demo}:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: senzing-phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    networks:
+      - backend
+    ports:
+      - 8080:80
+    restart: always
+    depends_on:
+      - mysql
+
+  app:
+    image: senzing/python-demo
+    container_name: senzing-app
+    environment:
+      SENZING_DATABASE_URL: "mysql://${MYSQL_USERNAME:-g2}:${MYSQL_PASSWORD:-g2}@senzing-mysql:3306/${MYSQL_DATABASE:-G2}"
+      LC_CTYPE: en_US.utf8
+    networks:
+      - backend
+    ports:
+      - 5000:5000
+    depends_on:
+      - mysqlinit
+    restart: on-failure
+
+networks:
+  backend:
