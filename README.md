@@ -93,21 +93,22 @@ The following docker images need to be installed.
 
 1. Creating `senzing/python-base` docker image.
 
-   There are two versions of `senzing/python-base`.
+   There are two options for building `senzing/python-base`.
 
-    1. Option #1 mounts `/opt/senzing` as an external volume.
+    1. **Option #1** mounts `/opt/senzing` as an external volume.
 
        ```console
        docker build --tag senzing/python-base https://github.com/senzing/docker-python-base.git
        ```
 
-    1. Option #2 includes `/opt/senzing` within the docker container's Union File System.
+    1. **Option #2** includes `/opt/senzing` within the docker container's Union File System.
        Follow build instructions at
        [Senzing/docker-python-base-complete](https://github.com/Senzing/docker-python-base-complete#build)
 
 1. Create remaining docker images.
 
 ```console
+docker build --tag senzing/mysql       https://github.com/senzing/docker-mysql.git
 docker build --tag senzing/mysql-init  https://github.com/senzing/docker-mysql-init.git
 docker build --tag senzing/python-demo https://github.com/senzing/docker-python-demo.git
 docker build --tag senzing/g2loader    https://github.com/senzing/docker-g2loader.git
@@ -116,8 +117,8 @@ docker build --tag senzing/g2command   https://github.com/senzing/docker-g2comma
 
 1. Based on your choice of "with" or "without" external volume, proceed to next section to "Run Docker formation".
 
-    1. Option #1: [Run Docker formation with external volume](#run-docker-formation-with-external-volume)
-    1. Option #2: [Run Docker formation without external volume](#run-docker-formation-without-external-volume)
+    1. **Option #1:** [Run Docker formation with external volume](#run-docker-formation-with-external-volume)
+    1. **Option #2:** [Run Docker formation without external volume](#run-docker-formation-without-external-volume)
 
 ## Run Docker formation with external volume
 
@@ -254,17 +255,17 @@ In a separate terminal window:
 1. [Set environment variables for docker](#set-environment-variables-for-docker)
 1. Set `MYSQL_DIR` and `MYSQL_FILE`.
    See [github.com/Senzing/docker-mysql](https://github.com/Senzing/docker-mysql#run-docker-container)
-   
+
     ```console
     export MYSQL_DIR=/opt/senzing/g2/data
-    export MYSQL_FILE=g2core-schema-mysql-create.sql    
+    export MYSQL_FILE=g2core-schema-mysql-create.sql
     ```
-    
+
 1. Run `docker` command.
 
     ```console
     docker run -it  \
-      --volume ${SQL_DIR}:/sql \
+      --volume ${MYSQL_DIR}:/sql \
       --net ${MYSQL_NETWORK} \
       senzing/mysql \
         --user=${MYSQL_USERNAME} \
