@@ -3,7 +3,7 @@
 1. Install all of the Senzing docker images:
 
     ```console
-    docker build --tag senzing/mysql       https://github.com/senzing/docker-mysql.git
+    docker build --tag senzing/mysql-init  https://github.com/senzing/docker-mysql-init.git
     docker build --tag senzing/python-base https://github.com/senzing/docker-python-base.git
     docker build --tag senzing/python-demo https://github.com/senzing/docker-python-demo.git
     docker build --tag senzing/g2loader    https://github.com/senzing/docker-g2loader.git
@@ -28,20 +28,6 @@
 
     ```console
     docker-compose up
-    ```
-
-1. Add Senzing schema. In a separate terminal window, set environment variables then run:
-
-    ```console
-    docker run -it  \
-      --volume ${SENZING_DIR}:/opt/senzing \
-      --net ${MYSQL_NETWORK} \
-      senzing/mysql \
-        --user=${MYSQL_USERNAME} \
-        --password=${MYSQL_PASSWORD} \
-        --host=${MYSQL_HOST} \
-        --database=${MYSQL_DATABASE} \
-        --execute="source /opt/senzing/g2/data/g2core-schema-mysql-create.sql"
     ```
 
 1. Run G2Loader.
