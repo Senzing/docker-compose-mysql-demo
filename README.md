@@ -77,14 +77,14 @@ The following software programs need to be installed.
 #### docker
 
 ```console
-docker --version
-docker run hello-world
+sudo docker --version
+sudo docker run hello-world
 ```
 
 #### docker-compose
 
 ```console
-docker-compose --version
+sudo docker-compose --version
 ```
 
 ### Docker images
@@ -98,7 +98,7 @@ The following docker images need to be installed.
     1. **Option #1** mounts `/opt/senzing` as an external volume.
 
        ```console
-       docker build --tag senzing/python-base https://github.com/senzing/docker-python-base.git
+       sudo docker build --tag senzing/python-base https://github.com/senzing/docker-python-base.git
        ```
 
     1. **Option #2** includes `/opt/senzing` within the docker container's Union File System.
@@ -108,11 +108,11 @@ The following docker images need to be installed.
 1. Create remaining docker images.
 
 ```console
-docker build --tag senzing/mysql       https://github.com/senzing/docker-mysql.git
-docker build --tag senzing/mysql-init  https://github.com/senzing/docker-mysql-init.git
-docker build --tag senzing/python-demo https://github.com/senzing/docker-python-demo.git
-docker build --tag senzing/g2loader    https://github.com/senzing/docker-g2loader.git
-docker build --tag senzing/g2command   https://github.com/senzing/docker-g2command.git
+sudo docker build --tag senzing/mysql       https://github.com/senzing/docker-mysql.git
+sudo docker build --tag senzing/mysql-init  https://github.com/senzing/docker-mysql-init.git
+sudo docker build --tag senzing/python-demo https://github.com/senzing/docker-python-demo.git
+sudo docker build --tag senzing/g2loader    https://github.com/senzing/docker-g2loader.git
+sudo docker build --tag senzing/g2command   https://github.com/senzing/docker-g2command.git
 ```
 
 1. Based on your choice of "with" or "without" external volume, proceed to next section to "Run Docker formation".
@@ -162,7 +162,7 @@ If you do not already have an `/opt/senzing` directory on your local system, vis
 
 ```console
 cd ${GIT_REPOSITORY_DIR}
-docker-compose up
+sudo docker-compose up
 ```
 
 Once docker formation is up, phpMyAdmin will be available at
@@ -182,7 +182,7 @@ In a separate (or reusable) terminal window:
 1. Run `docker` command
 
     ```console
-    docker run -it  \
+    sudo docker run -it  \
       --volume ${SENZING_DIR}:/opt/senzing \
       --net ${MYSQL_NETWORK} \
       --env SENZING_DATABASE_URL="mysql://${MYSQL_USERNAME}:${MYSQL_PASSWORD}@${MYSQL_HOST}:3306/${MYSQL_DATABASE}" \
@@ -199,7 +199,7 @@ In a separate (or reusable) terminal window:
 1. Run `docker` command
 
     ```console
-    docker run -it  \
+    sudo docker run -it  \
       --volume ${SENZING_DIR}:/opt/senzing \
       --net ${MYSQL_NETWORK} \
       --env SENZING_DATABASE_URL="mysql://${MYSQL_USERNAME}:${MYSQL_PASSWORD}@${MYSQL_HOST}:3306/${MYSQL_DATABASE}" \
@@ -234,7 +234,7 @@ In a separate (or reusable) terminal window:
 
 ```console
 cd ${GIT_REPOSITORY_DIR}
-docker-compose \
+sudo docker-compose \
     --file docker-compose-complete.yaml \
     up
 ```
@@ -264,7 +264,7 @@ In a separate terminal window:
 1. Run `docker` command.
 
     ```console
-    docker run -it  \
+    sudo docker run -it  \
       --volume ${MYSQL_DIR}:/sql \
       --net ${MYSQL_NETWORK} \
       senzing/mysql \
@@ -283,7 +283,7 @@ In a separate (or reusable) terminal window:
 1. Run `docker` command
 
     ```console
-    docker run -it  \
+    sudo docker run -it  \
       --net ${MYSQL_NETWORK} \
       --env SENZING_DATABASE_URL="mysql://${MYSQL_USERNAME}:${MYSQL_PASSWORD}@${MYSQL_HOST}:3306/${MYSQL_DATABASE}" \
       senzing/g2loader \
@@ -299,7 +299,7 @@ In a separate (or reusable) terminal window:
 1. Run `docker` command
 
     ```console
-    docker run -it  \
+    sudo docker run -it  \
       --net ${MYSQL_NETWORK} \
       --env SENZING_DATABASE_URL="mysql://${MYSQL_USERNAME}:${MYSQL_PASSWORD}@${MYSQL_HOST}:3306/${MYSQL_DATABASE}" \
       senzing/g2command
@@ -314,7 +314,7 @@ In a separate (or reusable) terminal window:
 
     ```console
     cd ${GIT_REPOSITORY_DIR}
-    docker-compose down
+    sudo docker-compose down
     ```
 
 1. Delete database storage.
