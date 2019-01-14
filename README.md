@@ -2,16 +2,20 @@
 
 ## Overview
 
+The following diagram shows the relationship of the docker containers in this docker composition.
+
+![Image of architecture](doc/img-architecture/architecture.png)
+
 This docker formation brings up the following docker containers:
 
-1. *mysql*
-1. *phpmyadmin/phpmyadmin*
+1. *[mysql](https://hub.docker.com/_/mysql)*
+1. *[phpmyadmin/phpmyadmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin)*
 1. *[senzing/mysql-init](https://github.com/Senzing/docker-mysql-init)*
 1. *[senzing/python-demo](https://github.com/Senzing/docker-python-demo)*
 
 Also shown in the demonstration are commands to run the following Docker images:
 
-1. *[senzing/g2loader](https://github.com/Senzing/docker-g2loader)* in [Add content](#add-content)
+1. *[senzing/g2loader](https://github.com/Senzing/docker-g2loader)* in [Run G2Loader.py](#run-g2loaderpy)
 1. *[senzing/g2command](https://github.com/Senzing/docker-g2command)* in [Run G2Command.py](#run-g2commandpy)
 
 ### Contents
@@ -19,19 +23,14 @@ Also shown in the demonstration are commands to run the following Docker images:
 1. [Preparation](#preparation)
     1. [Set environment variables](#set-environment-variables)
     1. [Clone repository](#clone-repository)
-    1. [Software](#software)
-    1. [Docker images](#docker-images)
-1. [Run Docker formation with external volume](#run-docker-formation-with-external-volume)
     1. [Create SENZING_DIR](#create-senzing_dir)
-    1. [Set environment variables](#set-environment-variables)
+    1. [Software](#software)
+1. [Using docker-compose](#using-docker-compose)
+    1. [Build docker images](#build-docker-images)
+    1. [Configuration](#configuration)
     1. [Launch docker formation](#launch-docker-formation)
-    1. [Add content](#add-content)
+    1. [Run G2Loader.py](#run-g2loaderpy)
     1. [Run G2Command.py](#run-g2commandpy)
-1. [Run Docker formation without external volume](#run-docker-formation-without-external-volume)
-    1. [Set environment variables for docker without external volume](#set-environment-variables-for-docker-without-external-volume)
-    1. [Launch docker formation without external volume](#launch-docker-formation-without-external-volume)
-    1. [Add content without external volume](#add-content-without-external-volume)
-    1. [Run G2Command.py without external volume](#run-g2commandpy-without-external-volume)
 1. [Cleanup](#cleanup)
 
 ### Shortcut
@@ -122,7 +121,7 @@ sudo docker-compose --version
 - **MYSQL_STORAGE** -
   Path on local system where the database files are stored.
   Default: "/storage/docker/senzing/docker-compose-mysql-demo"
-- See [github.com/Senzing/docker-mysql](https://github.com/Senzing/docker-mysql)
+- **MYSQL_xxxx** - See [github.com/Senzing/docker-mysql](https://github.com/Senzing/docker-mysql)
   for more details on how to find values for other **MYSQL_** environment variables.
 
 ### Launch docker formation
@@ -142,61 +141,22 @@ sudo docker-compose --version
 
     sudo docker-compose up
     ```
+1. In the docker-compose log, wait for the following log record:
+
+    ```console
+    senzing-mysql-init exited with code 0
+    ```
+
+    There will be errors shown in the docker-compose log until that log record is published.
 
 1. Once docker formation is up, phpMyAdmin will be available at
-   [localhost:8080](http://localhost:8080).
+   [localhost:8080](http://localhost:8080). Login with `MYSQL_USERNAME` and `MYSQL_PASSWORD`.
 1. The database storage will be on the local system at ${MYSQL_STORAGE}.
    The default database storage path is `/storage/docker/senzing/docker-compose-mysql-demo`.
 1. After the schema is loaded, the demonstration python/Flask app will be available at
    [localhost:5000](http://localhost:5000).
 
-### Add Senzing schemas
-
-In a separate terminal window:
-
-1. Determine docker network. Example:
-
-    ```console
-    sudo docker network ls
-
-    # Choose value from NAME column of docker network ls
-    export SENZING_NETWORK=nameofthe_network
-    ```
-
-1. Set `MYSQL_DIR` and `MYSQL_FILE`.
-   See [github.com/Senzing/docker-mysql](https://github.com/Senzing/docker-mysql#run-docker-container).
-   Example:
-
-    ```console
-    export MYSQL_DIR=/opt/senzing/g2/data
-    export MYSQL_FILE=g2core-schema-mysql-create.sql
-    ```
-
-1. Set database connection information.  Example:
-
-    ```console
-    export MYSQL_HOST=senzing-mysql
-    export MYSQL_DATABASE=G2
-    export MYSQL_ROOT_PASSWORD=root
-    export MYSQL_USERNAME=g2
-    export MYSQL_PASSWORD=g2
-    ```
-
-1. Run `docker` command. Example:
-
-    ```console
-    sudo docker run -it  \
-      --volume ${MYSQL_DIR}:/sql \
-      --net ${SENZING_NETWORK} \
-      senzing/mysql \
-        --user=${MYSQL_USERNAME} \
-        --password=${MYSQL_PASSWORD} \
-        --host=${MYSQL_HOST} \
-        --database=${MYSQL_DATABASE} \
-        --execute="source /sql/${MYSQL_FILE}"
-    ```
-
-### Add content
+### Run G2Loader.py
 
 In a separate terminal window:
 
@@ -213,8 +173,8 @@ In a separate terminal window:
 
     ```console
     export DATABASE_PROTOCOL=mysql
-    export DATABASE_USERNAME=root
-    export DATABASE_PASSWORD=root
+    export DATABASE_USERNAME=g2
+    export DATABASE_PASSWORD=g2
     export DATABASE_HOST=senzing-mysql
     export DATABASE_PORT=3306
     export DATABASE_DATABASE=G2
