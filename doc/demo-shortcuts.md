@@ -2,6 +2,8 @@
 
 ## Install all of the Senzing docker images
 
+1. Build all Senzing docker images locally.
+
     ```console
     sudo docker build --tag senzing/mysql       https://github.com/senzing/docker-mysql.git
     sudo docker build --tag senzing/mysql-init  https://github.com/senzing/docker-mysql-init.git
@@ -12,6 +14,8 @@
     ```
 
 ## Set environment variables
+
+1. Set environment variables used in docker-compose and docker images. Example:
 
     ```console
     export MYSQL_HOST=senzing-mysql
@@ -28,11 +32,15 @@
 
 ## Launch docker formation
 
+1. Bring up docker formation.
+
     ```console
     sudo docker-compose up
     ```
 
 ## Run G2Loader
+
+1. Run G2Loader.py in docker container.
 
     ```console
     sudo docker run -it  \
@@ -45,6 +53,8 @@
     ```
 
 ## Run G2Command
+
+1. Run G2Command.py in docker container.
 
     ```console
     sudo docker run -it  \
