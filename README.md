@@ -147,10 +147,11 @@ sudo docker-compose --version
     senzing-mysql-init exited with code 0
     ```
 
-    There will be errors shown in the docker-compose log until that log record is published.
+    There will be errors, due to docker container dependencies,
+    shown in the docker-compose log until that log record is published.
 
 1. Once docker formation is up, phpMyAdmin will be available at
-   [localhost:8080](http://localhost:8080). Login with `MYSQL_USERNAME` and `MYSQL_PASSWORD`.
+   [localhost:8080](http://localhost:8080). Login with values specified for `MYSQL_USERNAME` and `MYSQL_PASSWORD`.
 1. The database storage will be on the local system at ${MYSQL_STORAGE}.
    The default database storage path is `/storage/docker/senzing/docker-compose-mysql-demo`.
 1. After the schema is loaded, the demonstration python/Flask app will be available at
