@@ -24,11 +24,12 @@ Also shown in the demonstration are commands to run the following Docker images:
     1. [Set environment variables](#set-environment-variables)
     1. [Clone repository](#clone-repository)
     1. [Create SENZING_DIR](#create-senzing_dir)
-    1. [Software](#software)
+    1. [Prerequisite Software](#prerequisite-software)
 1. [Using docker-compose](#using-docker-compose)
     1. [Build docker images](#build-docker-images)
     1. [Configuration](#configuration)
     1. [Launch docker formation](#launch-docker-formation)
+    1. [Test docker formation](#test-docker-formation)
     1. [Run G2Loader.py](#run-g2loaderpy)
     1. [Run G2Command.py](#run-g2commandpy)
 1. [Cleanup](#cleanup)
@@ -181,10 +182,11 @@ The following software programs need to be installed.
     export MYSQL_ROOT_PASSWORD=root
     export MYSQL_USERNAME=g2
     export MYSQL_PASSWORD=g2
-    export MYSQL_STORAGE=/storage/docker/senzing/docker-compose-mysql-demo
 
     sudo docker-compose -f docker-compose-diskless-mysql.yaml up
     ```
+
+### Test docker formation
 
 1. In the docker-compose log, wait for the following log record:
 
