@@ -74,22 +74,28 @@ For a "short cut" version of the command, see
 If you do not already have an `/opt/senzing` directory on your local system, visit
 [HOWTO - Create SENZING_DIR](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/create-senzing-dir.md).
 
-### Software
+### Prerequisite software
 
 The following software programs need to be installed.
 
 #### docker
 
-```console
-sudo docker --version
-sudo docker run hello-world
-```
+1. [Install docker](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-docker.md)
+1. Test
+
+    ```console
+    sudo docker --version
+    sudo docker run hello-world
+    ```
 
 #### docker-compose
 
-```console
-sudo docker-compose --version
-```
+1. [Install docker-compose](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-docker-compose.md)
+1. Test
+
+    ```console
+    sudo docker-compose --version
+    ```
 
 ## Using docker-compose
 
@@ -126,6 +132,8 @@ sudo docker-compose --version
 
 ### Launch docker formation
 
+#### Variation 1
+
 1. Launch docker-compose formation.  Example:
 
     ```console
@@ -141,6 +149,43 @@ sudo docker-compose --version
 
     sudo docker-compose up
     ```
+
+1. In the docker-compose log, wait for the following log record:
+
+    ```console
+    senzing-mysql-init exited with code 0
+    ```
+
+    There will be errors, due to docker container dependencies,
+    shown in the docker-compose log until that log record is published.
+
+1. Once docker formation is up, phpMyAdmin will be available at
+   [localhost:8080](http://localhost:8080). Login with values specified for `MYSQL_USERNAME` and `MYSQL_PASSWORD`.
+1. The database storage will be on the local system at ${MYSQL_STORAGE}.
+   The default database storage path is `/storage/docker/senzing/docker-compose-mysql-demo`.
+1. After the schema is loaded, the demonstration python/Flask app will be available at
+   [localhost:5000](http://localhost:5000).
+
+#### Variation 2
+
+1. Launch docker-compose formation with "diskless mysql".
+   In this docker formation, the mysql docker container does not externalize `/var/lib/mysql`
+   Example:
+
+    ```console
+    cd ${GIT_REPOSITORY_DIR}
+
+    export SENZING_DIR=/opt/senzing
+    export MYSQL_HOST=senzing-mysql
+    export MYSQL_DATABASE=G2
+    export MYSQL_ROOT_PASSWORD=root
+    export MYSQL_USERNAME=g2
+    export MYSQL_PASSWORD=g2
+    export MYSQL_STORAGE=/storage/docker/senzing/docker-compose-mysql-demo
+
+    sudo docker-compose -f docker-compose-diskless-mysql.yaml up
+    ```
+
 1. In the docker-compose log, wait for the following log record:
 
     ```console
