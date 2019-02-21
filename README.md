@@ -154,7 +154,8 @@ The following software programs need to be installed.
 #### Variation 2
 
 1. Launch docker-compose formation with "diskless mysql".
-   In this docker formation, the mysql docker container does not externalize `/var/lib/mysql`
+   In this docker formation, the mysql docker container does not externalize `/var/lib/mysql`.
+   This is done by using docker's `--tmpfs` parameter rather than its `--volume` parameter.
    Example:
 
     ```console
