@@ -61,7 +61,7 @@ This repository assumes a working knowledge of:
 
     ```console
     export GIT_ACCOUNT=senzing
-    export GIT_REPOSITORY=docker-compose-postgresql-demo
+    export GIT_REPOSITORY=docker-compose-mysql-demo
     ```
 
    Then follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/clone-repository.md).
