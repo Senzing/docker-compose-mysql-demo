@@ -128,10 +128,10 @@ The following software programs need to be installed.
       --tag senzing/g2command \
       --build-arg BASE_IMAGE=${BASE_IMAGE} \
       https://github.com/senzing/docker-g2command.git
-      
+
     sudo docker build \
       --tag senzing/mysql \
-      https://github.com/senzing/docker-mysql.git      
+      https://github.com/senzing/docker-mysql.git
     ```
 
 ### Configuration
@@ -171,6 +171,7 @@ The following software programs need to be installed.
 
     sudo docker-compose up
     ```
+
     **Note:** The log will show errors from `senzing-app` until the database has been initialized in the next step.
 
 #### Variation 2
@@ -192,8 +193,9 @@ The following software programs need to be installed.
 
     sudo docker-compose -f docker-compose-diskless-mysql.yaml up
     ```
+
     **Note:** The log will show errors from `senzing-app` until the database has been initialized in the next step.
-    
+
 ### Initialize database
 
 1. The database will be initialized using phpMyAdmin at [localhost:8080](http://localhost:8080).
