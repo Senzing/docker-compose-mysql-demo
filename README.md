@@ -89,33 +89,15 @@ If you do not already have an `/opt/senzing` directory on your local system, vis
 
 ### Build docker images
 
+1. Build [senzing/senzing-base](https://github.com/Senzing/docker-senzing-base) docker image.
+
 1. Build docker images.
 
     ```console
-    export BASE_IMAGE=senzing/python-mysql-base
-
-    sudo docker build \
-      --tag ${BASE_IMAGE} \
-      https://github.com/senzing/docker-python-mysql-base.git
-
-    sudo docker build \
-      --tag senzing/python-demo \
-      --build-arg BASE_IMAGE=${BASE_IMAGE} \
-      https://github.com/senzing/docker-python-demo.git
-
-    sudo docker build \
-      --tag senzing/g2loader \
-      --build-arg BASE_IMAGE=${BASE_IMAGE} \
-      https://github.com/senzing/docker-g2loader.git
-
-    sudo docker build \
-      --tag senzing/g2command \
-      --build-arg BASE_IMAGE=${BASE_IMAGE} \
-      https://github.com/senzing/docker-g2command.git
-
-    sudo docker build \
-      --tag senzing/mysql \
-      https://github.com/senzing/docker-mysql.git
+    sudo docker build --tag senzing/python-demo  https://github.com/senzing/docker-python-demo.git
+    sudo docker build --tag senzing/g2loader     https://github.com/senzing/docker-g2loader.git
+    sudo docker build --tag senzing/g2command    https://github.com/senzing/docker-g2command.git
+    sudo docker build --tag senzing/mysql        https://github.com/senzing/docker-mysql.git
     ```
 
 ### Configuration
