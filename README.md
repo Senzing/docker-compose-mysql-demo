@@ -197,7 +197,9 @@ This is done by using docker's `--tmpfs` parameter rather than its `--volume` pa
 ### Sample python app
 
 1. After the schema and data are loaded,
-   the demonstration python/Flask app will be available at
+   the demonstration
+   [python/Flask](https://github.com/Senzing/docker-python-demo)
+   app will be available at
    [localhost:5000](http://localhost:5000).
 
 ### Run G2Loader.py
@@ -219,18 +221,18 @@ In a separate terminal window:
 1. :pencil2: Set environment variables.  Example:
 
     ```console
-    export DATABASE_USERNAME=g2
-    export DATABASE_PASSWORD=g2
     export DATABASE_DATABASE=G2
+    export DATABASE_PASSWORD=g2
+    export DATABASE_USERNAME=g2
     export SENZING_DIR=/opt/senzing
     ```
 
 1. Run `docker` command. Example:
 
     ```console
-    export DATABASE_PROTOCOL=mysql
     export DATABASE_HOST=senzing-mysql
     export DATABASE_PORT=3306
+    export DATABASE_PROTOCOL=mysql
     export SENZING_DATABASE_URL="${DATABASE_PROTOCOL}://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}"
 
     sudo docker run \
@@ -264,18 +266,18 @@ In a separate terminal window:
 1. :pencil2: Set environment variables.  Example:
 
     ```console
-    export DATABASE_USERNAME=g2
-    export DATABASE_PASSWORD=g2
     export DATABASE_DATABASE=G2
+    export DATABASE_PASSWORD=g2
+    export DATABASE_USERNAME=g2
     export SENZING_DIR=/opt/senzing
     ```
 
 1. Run `docker` command. Example:
 
     ```console
-    export DATABASE_PROTOCOL=mysql
     export DATABASE_HOST=senzing-mysql
     export DATABASE_PORT=3306
+    export DATABASE_PROTOCOL=mysql
     export SENZING_DATABASE_URL="${DATABASE_PROTOCOL}://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}"
 
     sudo docker run \
