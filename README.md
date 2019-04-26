@@ -90,8 +90,6 @@ If you do not already have an `/opt/senzing` directory on your local system, vis
 
 ### Build docker images
 
-1. Build [senzing/senzing-base](https://github.com/Senzing/docker-senzing-base) docker image.
-
 1. Build docker images.
 
     ```console
@@ -221,10 +219,8 @@ In a separate terminal window:
 1. :pencil2: Set environment variables.  Example:
 
     ```console
-    export DATABASE_PROTOCOL=mysql
     export DATABASE_USERNAME=g2
     export DATABASE_PASSWORD=g2
-    export DATABASE_PORT=3306
     export DATABASE_DATABASE=G2
     export SENZING_DIR=/opt/senzing
     ```
@@ -232,7 +228,9 @@ In a separate terminal window:
 1. Run `docker` command. Example:
 
     ```console
+    export DATABASE_PROTOCOL=mysql
     export DATABASE_HOST=senzing-mysql
+    export DATABASE_PORT=3306
     export SENZING_DATABASE_URL="${DATABASE_PROTOCOL}://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}"
 
     sudo docker run \
@@ -266,10 +264,8 @@ In a separate terminal window:
 1. :pencil2: Set environment variables.  Example:
 
     ```console
-    export DATABASE_PROTOCOL=mysql
     export DATABASE_USERNAME=g2
     export DATABASE_PASSWORD=g2
-    export DATABASE_PORT=3306
     export DATABASE_DATABASE=G2
     export SENZING_DIR=/opt/senzing
     ```
@@ -277,7 +273,9 @@ In a separate terminal window:
 1. Run `docker` command. Example:
 
     ```console
+    export DATABASE_PROTOCOL=mysql
     export DATABASE_HOST=senzing-mysql
+    export DATABASE_PORT=3306
     export SENZING_DATABASE_URL="${DATABASE_PROTOCOL}://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}"
 
     sudo docker run \
