@@ -32,6 +32,7 @@ Also shown in the demonstration are commands to run the following Docker images:
     1. [Configuration](#configuration)
     1. [Launch docker formation](#launch-docker-formation)
     1. [Initialize database](#initialize-database)
+    1. [Sample python app](#sample-python-app)
     1. [Run G2Loader.py](#run-g2loaderpy)
     1. [Run G2Command.py](#run-g2commandpy)
 1. [Cleanup](#cleanup)
@@ -71,7 +72,7 @@ The following software programs need to be installed:
     export GIT_REPOSITORY=docker-compose-mysql-demo
     ```
 
-   Then follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/clone-repository.md).
+1. Follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/clone-repository.md) to install the Git repository.
 
 1. After the repository has been cloned, be sure the following are set:
 
@@ -94,10 +95,7 @@ If you do not already have an `/opt/senzing` directory on your local system, vis
 1. Build docker images.
 
     ```console
-    sudo docker build --tag senzing/python-demo  https://github.com/senzing/docker-python-demo.git
-    sudo docker build --tag senzing/g2loader     https://github.com/senzing/docker-g2loader.git
-    sudo docker build --tag senzing/g2command    https://github.com/senzing/docker-g2command.git
-    sudo docker build --tag senzing/mysql        https://github.com/senzing/docker-mysql.git
+    sudo docker build --tag senzing/mysql   https://github.com/senzing/docker-mysql.git
     ```
 
 ### Configuration
@@ -122,42 +120,66 @@ If you do not already have an `/opt/senzing` directory on your local system, vis
 
 #### Variation 1
 
+1. :pencil2: Set environment variables.  Example:
+
+    ```console
+    export MYSQL_DATABASE=G2
+    export MYSQL_HOST=senzing-mysql
+    export MYSQL_PASSWORD=g2
+    export MYSQL_ROOT_PASSWORD=root
+    export MYSQL_STORAGE=/storage/docker/senzing/docker-compose-mysql-demo
+    export MYSQL_USERNAME=g2
+    export SENZING_DIR=/opt/senzing
+    ```
+
 1. Launch docker-compose formation.  Example:
 
     ```console
     cd ${GIT_REPOSITORY_DIR}
 
-    export SENZING_DIR=/opt/senzing
-    export MYSQL_HOST=senzing-mysql
-    export MYSQL_DATABASE=G2
-    export MYSQL_ROOT_PASSWORD=root
-    export MYSQL_USERNAME=g2
-    export MYSQL_PASSWORD=g2
-    export MYSQL_STORAGE=/storage/docker/senzing/docker-compose-mysql-demo
-
-    sudo docker-compose up
+    sudo \
+     MYSQL_DATABASE=${MYSQL_DATABASE} \
+     MYSQL_HOST=${MYSQL_HOST} \
+     MYSQL_PASSWORD=${MYSQL_PASSWORD} \
+     MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
+     MYSQL_STORAGE=${MYSQL_STORAGE} \
+     MYSQL_USERNAME=${MYSQL_USERNAME} \
+     SENZING_DIR=${SENZING_DIR} \
+     docker-compose up
     ```
 
     **Note:** The log will show errors from `senzing-app` until the database has been initialized in the next step.
 
 #### Variation 2
 
-1. Launch docker-compose formation with "diskless mysql".
-   In this docker formation, the mysql docker container does not externalize `/var/lib/mysql`.
-   This is done by using docker's `--tmpfs` parameter rather than its `--volume` parameter.
-   Example:
+Launch docker-compose formation with "diskless mysql".
+In this docker formation, the mysql docker container does not externalize `/var/lib/mysql`.
+This is done by using docker's `--tmpfs` parameter rather than its `--volume` parameter.
+
+1. :pencil2: Set environment variables.  Example:
+
+    ```console
+    export MYSQL_DATABASE=G2
+    export MYSQL_HOST=senzing-mysql
+    export MYSQL_PASSWORD=g2
+    export MYSQL_ROOT_PASSWORD=root
+    export MYSQL_USERNAME=g2
+    export SENZING_DIR=/opt/senzing
+    ```
+
+1. Launch docker-compose formation.  Example:
 
     ```console
     cd ${GIT_REPOSITORY_DIR}
 
-    export SENZING_DIR=/opt/senzing
-    export MYSQL_HOST=senzing-mysql
-    export MYSQL_DATABASE=G2
-    export MYSQL_ROOT_PASSWORD=root
-    export MYSQL_USERNAME=g2
-    export MYSQL_PASSWORD=g2
-
-    sudo docker-compose -f docker-compose-diskless-mysql.yaml up
+    sudo \
+     MYSQL_DATABASE=${MYSQL_DATABASE} \
+     MYSQL_HOST=${MYSQL_HOST} \
+     MYSQL_PASSWORD=${MYSQL_PASSWORD} \
+     MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
+     MYSQL_USERNAME=${MYSQL_USERNAME} \
+     SENZING_DIR=${SENZING_DIR} \
+     docker-compose --file docker-compose-diskless-mysql.yaml up
     ```
 
     **Note:** The log will show errors from `senzing-app` until the database has been initialized in the next step.
@@ -170,7 +192,11 @@ If you do not already have an `/opt/senzing` directory on your local system, vis
 1. Click "Import" tab.
 1. Click "Browse..." button and locate `/opt/senzing/g2/data/g2core-schema-mysql-create.sql`
 1. Click "Go" button.
-1. After the schema is loaded, the demonstration python/Flask app will be available at
+
+### Sample python app
+
+1. After the schema and data are loaded,
+   the demonstration python/Flask app will be available at
    [localhost:5000](http://localhost:5000).
 
 ### Run G2Loader.py
@@ -180,7 +206,7 @@ For more information on `senzing/g2loader` configuration and usage, see
 
 In a separate terminal window:
 
-1. Determine docker network. Example:
+1. :pencil2: Determine docker network. Example:
 
     ```console
     sudo docker network ls
@@ -189,7 +215,7 @@ In a separate terminal window:
     export SENZING_NETWORK=nameofthe_network
     ```
 
-1. Run `docker` command. Example:
+1. :pencil2: Set environment variables.  Example:
 
     ```console
     export DATABASE_PROTOCOL=mysql
@@ -198,9 +224,13 @@ In a separate terminal window:
     export DATABASE_HOST=senzing-mysql
     export DATABASE_PORT=3306
     export DATABASE_DATABASE=G2
-
-    export SENZING_DATABASE_URL="${DATABASE_PROTOCOL}://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}"
     export SENZING_DIR=/opt/senzing
+    ```
+
+1. Run `docker` command. Example:
+
+    ```console
+    export SENZING_DATABASE_URL="${DATABASE_PROTOCOL}://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}"
 
     sudo docker run \
       --env SENZING_DATABASE_URL="${SENZING_DATABASE_URL}" \
@@ -221,7 +251,7 @@ For more information on `senzing/g2command` configuration and usage, see
 
 In a separate terminal window:
 
-1. Determine docker network. Example:
+1. :pencil2: Determine docker network. Example:
 
     ```console
     sudo docker network ls
@@ -230,18 +260,22 @@ In a separate terminal window:
     export SENZING_NETWORK=nameofthe_network
     ```
 
-1. Run `docker` command. Example:
+1. :pencil2: Set environment variables.  Example:
 
     ```console
     export DATABASE_PROTOCOL=mysql
-    export DATABASE_USERNAME=root
-    export DATABASE_PASSWORD=root
+    export DATABASE_USERNAME=g2
+    export DATABASE_PASSWORD=g2
     export DATABASE_HOST=senzing-mysql
     export DATABASE_PORT=3306
     export DATABASE_DATABASE=G2
-
-    export SENZING_DATABASE_URL="${DATABASE_PROTOCOL}://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}"
     export SENZING_DIR=/opt/senzing
+    ```
+
+1. Run `docker` command. Example:
+
+    ```console
+    export SENZING_DATABASE_URL="${DATABASE_PROTOCOL}://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}"
 
     sudo docker run \
       --env SENZING_DATABASE_URL="${SENZING_DATABASE_URL}" \
