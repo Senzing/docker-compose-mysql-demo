@@ -100,14 +100,21 @@ If you do not already have an `/opt/senzing` directory on your local system, vis
 
 ### Configuration
 
+- **MYSQL_DATABASE** -
+  The database name.
+  Default: "G2"
+- **MYSQL_PASSWORD** -
+  Password for MYSQL_USERNAME user.
+  Default: "g2"
 - **MYSQL_ROOT_PASSWORD** -
   The password for the the database "root" user name.
   Default: "root"
 - **MYSQL_STORAGE** -
   Path on local system where the database files are stored.
   Default: "/storage/docker/senzing/docker-compose-mysql-demo"
-- **MYSQL_xxxx** - See [github.com/Senzing/docker-mysql](https://github.com/Senzing/docker-mysql)
-  for more details on how to find values for other **MYSQL_** environment variables.
+- **MYSQL_USERNAME** -
+  Non-root username.
+  Default: "g2"
 - **SENZING_DIR** -
   Path on the local system where
   [Senzing_API.tgz](https://s3.amazonaws.com/public-read-access/SenzingComDownloads/Senzing_API.tgz)
@@ -124,7 +131,6 @@ If you do not already have an `/opt/senzing` directory on your local system, vis
 
     ```console
     export MYSQL_DATABASE=G2
-    export MYSQL_HOST=senzing-mysql
     export MYSQL_PASSWORD=g2
     export MYSQL_ROOT_PASSWORD=root
     export MYSQL_STORAGE=/storage/docker/senzing/docker-compose-mysql-demo
@@ -139,7 +145,6 @@ If you do not already have an `/opt/senzing` directory on your local system, vis
 
     sudo \
      MYSQL_DATABASE=${MYSQL_DATABASE} \
-     MYSQL_HOST=${MYSQL_HOST} \
      MYSQL_PASSWORD=${MYSQL_PASSWORD} \
      MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
      MYSQL_STORAGE=${MYSQL_STORAGE} \
@@ -160,7 +165,6 @@ This is done by using docker's `--tmpfs` parameter rather than its `--volume` pa
 
     ```console
     export MYSQL_DATABASE=G2
-    export MYSQL_HOST=senzing-mysql
     export MYSQL_PASSWORD=g2
     export MYSQL_ROOT_PASSWORD=root
     export MYSQL_USERNAME=g2
@@ -174,7 +178,6 @@ This is done by using docker's `--tmpfs` parameter rather than its `--volume` pa
 
     sudo \
      MYSQL_DATABASE=${MYSQL_DATABASE} \
-     MYSQL_HOST=${MYSQL_HOST} \
      MYSQL_PASSWORD=${MYSQL_PASSWORD} \
      MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
      MYSQL_USERNAME=${MYSQL_USERNAME} \
@@ -221,7 +224,6 @@ In a separate terminal window:
     export DATABASE_PROTOCOL=mysql
     export DATABASE_USERNAME=g2
     export DATABASE_PASSWORD=g2
-    export DATABASE_HOST=senzing-mysql
     export DATABASE_PORT=3306
     export DATABASE_DATABASE=G2
     export SENZING_DIR=/opt/senzing
@@ -230,6 +232,7 @@ In a separate terminal window:
 1. Run `docker` command. Example:
 
     ```console
+    export DATABASE_HOST=senzing-mysql
     export SENZING_DATABASE_URL="${DATABASE_PROTOCOL}://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}"
 
     sudo docker run \
@@ -266,7 +269,6 @@ In a separate terminal window:
     export DATABASE_PROTOCOL=mysql
     export DATABASE_USERNAME=g2
     export DATABASE_PASSWORD=g2
-    export DATABASE_HOST=senzing-mysql
     export DATABASE_PORT=3306
     export DATABASE_DATABASE=G2
     export SENZING_DIR=/opt/senzing
@@ -275,6 +277,7 @@ In a separate terminal window:
 1. Run `docker` command. Example:
 
     ```console
+    export DATABASE_HOST=senzing-mysql
     export SENZING_DATABASE_URL="${DATABASE_PROTOCOL}://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}"
 
     sudo docker run \
