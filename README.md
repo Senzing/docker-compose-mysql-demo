@@ -1,5 +1,17 @@
 # docker-compose-mysql-demo
 
+## :no_entry: Deprecated
+
+This repository was an early example of a docker-compose formation
+using Senzing with dockerized Python scripts.
+It is deprecated and will not be maintained.
+
+It has been replaced by
+[github.com/Senzing/docker-compose-demo](https://github.com/Senzing/docker-compose-demo)
+which shows docker-compose formations for multiple databases.
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 ## Overview
 
 The following diagram shows the relationship of the docker containers in this docker composition.
@@ -98,22 +110,22 @@ If you do not already have an `/opt/senzing` directory on your local system, vis
 
 ### Configuration
 
-- **MYSQL_DATABASE** -
+* **MYSQL_DATABASE** -
   The database name.
   Default: "G2"
-- **MYSQL_PASSWORD** -
+* **MYSQL_PASSWORD** -
   Password for MYSQL_USERNAME user.
   Default: "g2"
-- **MYSQL_ROOT_PASSWORD** -
+* **MYSQL_ROOT_PASSWORD** -
   The password for the the database "root" user name.
   Default: "root"
-- **MYSQL_STORAGE** -
+* **MYSQL_STORAGE** -
   Path on local system where the database files are stored.
   Default: "/storage/docker/senzing/docker-compose-mysql-demo"
-- **MYSQL_USERNAME** -
+* **MYSQL_USERNAME** -
   Non-root username.
   Default: "g2"
-- **SENZING_DIR** -
+* **SENZING_DIR** -
   Path on the local system where
   [Senzing_API.tgz](https://s3.amazonaws.com/public-read-access/SenzingComDownloads/Senzing_API.tgz)
   has been extracted.
